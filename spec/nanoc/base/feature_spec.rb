@@ -27,5 +27,7 @@ describe Nanoc::Feature do
       before { ENV['NANOC_FEATURES'] = 'foo,magic,bar' }
       it { is_expected.to be }
     end
+
+    # TODO: verify that features are disabled in the current release version
   end
 end
