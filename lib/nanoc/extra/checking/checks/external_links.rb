@@ -81,6 +81,9 @@ module ::Nanoc::Extra::Checking::Checks
     end
 
     def validate(href)
+      # Skip href's that are in the exclude list
+      return true if excluded?(href)
+
       # Parse
       url = nil
       begin
@@ -150,6 +153,11 @@ module ::Nanoc::Extra::Checking::Checks
       end
 
       path
+    end
+
+    def excluded?(href)
+      excludes =  @site.config.fetch(:checks, {}).fetch(:external_links, {}).fetch(:exclude, [])
+      excludes.any? { |pattern| Regexp.new(pattern).match(href) }
     end
 
     def request_url_once(url, req_method = Net::HTTP::Head)
