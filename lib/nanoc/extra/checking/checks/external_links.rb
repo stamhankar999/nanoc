@@ -82,7 +82,7 @@ module ::Nanoc::Extra::Checking::Checks
 
     def validate(href)
       # Skip href's that are in the exclude list
-      return true if excluded?(href)
+      return nil if excluded?(href)
 
       # Parse
       url = nil
